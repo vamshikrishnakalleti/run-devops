@@ -10,10 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '0a09e22b-c4e5-4533-9462-1bfe7e0e256f'
   imageRepository: 'vamshikrishnakalletirundevops'
-  containerRegistry: 'vigneshwarasacr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Shopping/Shopping.API/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -21,7 +18,7 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build and push stage
+  displayName: Build stage
   jobs:
   - job: Build
     displayName: Build
@@ -31,9 +28,8 @@ stages:
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
+        containerRegistry: 'vigneshwarasacr'
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        Dockerfile: '$(Build.SourcesDirectory)/Shopping/Shopping.API/Dockerfile'
+        
