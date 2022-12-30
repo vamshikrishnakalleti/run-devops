@@ -60,7 +60,6 @@ stages:
               action: 'createSecret'
               kubernetesServiceConnection: 'TwoMSCode-svc'
               namespace: 'default'
-              secretType: 'dockerRegistry'
               secretName: 'FiveMSC-secret'
               dockerRegistryEndpoint: 'vigneshwarasacr'
 
