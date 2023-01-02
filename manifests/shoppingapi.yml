@@ -36,8 +36,7 @@ spec:
               memory: "128Mi"
               cpu: "0.3"
       imagePullSecrets:
-        - name: acr-secret
-
+        - name: fivemsc-secret
 ---
 apiVersion: v1
 kind: Service
