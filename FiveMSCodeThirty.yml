@@ -61,7 +61,7 @@ stages:
               kubernetesServiceConnection: 'TwoMSCode-svc'
               namespace: 'default'
               secretType: 'dockerRegistry'
-              secretName: 'fivemsc-secret'
+              secretName: 'acr-secret'
               dockerRegistryEndpoint: 'vigneshwarasacr'
 
           - task: KubernetesManifest@0
@@ -72,5 +72,5 @@ stages:
               namespace: 'default'
               manifests: '$(Pipeline.Workspace)/manifests/shoppingapi.yml'
               containers: '$(containerRegistry)/$(imageRepository):$(tag)'
-              imagePullSecrets: '$(imagePullSecret)'
+              
 
