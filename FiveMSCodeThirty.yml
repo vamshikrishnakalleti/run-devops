@@ -37,8 +37,8 @@ stages:
         buildContext: '$(Build.SourcesDirectory)/Shopping'
         tags: '$(tag)'
 
-    - upload: manifests
-      artifact: manifests
+    - upload: manifest
+      artifact: manifest
 
 - stage: Deploy
   displayName: Deploy stage
@@ -70,7 +70,7 @@ stages:
               action: 'deploy'
               kubernetesServiceConnection: 'TwoMSCode-svc'
               namespace: 'default'
-              manifests: '$(Pipeline.Workspace)/manifests/shoppingapi.yml'
+              manifests: '$(Pipeline.Workspace)/manifest/shoppingapi.yml'
               containers: '$(containerRegistry)/$(imageRepository):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
 
