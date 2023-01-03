@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: vamshikrishnakalletirundevops 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vamshikrishnakalletirundevops
+  template:
+    metadata:
+      labels:
+        app: vamshikrishnakalletirundevops 
+    spec:
+      containers:
+        - name: vamshikrishnakalletirundevops 
+          image: vigneshwarasacr.azurecr.io/vamshikrishnakalletirundevops
+          ports:
+          - containerPort: 80
