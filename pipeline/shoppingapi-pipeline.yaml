@@ -10,20 +10,15 @@ trigger:
       include:
       - Shopping/Shopping.API/*
       - aks/shoppingapi.yaml
-      
-
-resources:
-- repo: self
 
 variables:
-
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '17b06a25-1fa9-4527-9278-c40496f86df8'
-  imageRepository: 'shoppingapi'
-  containerRegistry: 'vigneshwarashoppingacr.azurecr.io'
-  dockerfilePath: 'Shopping/Shopping.API/Dockerfile'
+  dockerRegistryServiceConnection: '859ce0de-5294-4d39-8344-8e9cb19fd4ac'
+  imageRepository: 'vamshikrishnakalletirundevops'
+  containerRegistry: 'vigneshwarasacr.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'vigneshwarashoppingacr1100a7a9-auth'
+  imagePullSecret: 'vigneshwarasacr1914d8d8-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -45,7 +40,7 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        buildContext: $(Build.SourcesDirectory)/Shopping
+        buildContext: '$(Build.SourcesDirectory)/Shopping'
         tags: |
           $(tag)
 
@@ -61,7 +56,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'vamshikrishnakalletirundevops-2006.default'
+    environment: 'vamshikrishnakalletirundevops-1774.default'
     strategy:
       runOnce:
         deploy:
@@ -69,18 +64,20 @@ stages:
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              action: 'createSecret'
+              kubernetesServiceConnection: 'TwoMSCode-svc'
+              namespace: 'default'
+              secretType: 'dockerRegistry'
+              secretName: '$(imagePullSecret)'
+              dockerRegistryEndpoint: '$(dockerRegistryServiceConnection)'
 
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/aks/shoppingapi.yaml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+              action: 'deploy'
+              kubernetesServiceConnection: 'TwoMSCode-svc'
+              namespace: 'default'
+              manifests: '$(Pipeline.Workspace)/aks/shoppingapi.yaml'
+              containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+              imagePullSecrets: '$(imagePullSecret)'
 
