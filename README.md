@@ -47,6 +47,11 @@ When we push code to Github, microservices pipeline triggers, build docker image
 
 You’ll see how to deploy your multi-container microservices applications with automating all deployment process seperately.
 
+[![Build Status](https://dev.azure.com/rsndp12/vigneshwaras/_apis/build/status/vamshikrishnakalleti.shoppingclient-pipeline?branchName=master)]
+(https://dev.azure.com/rsndp12/vigneshwaras/_build/latest?definitionId=52&branchName=master)
 
+
+[![Build Status](https://dev.azure.com/rsndp12/vigneshwaras/_apis/build/status/vamshikrishnakalleti.shoppingapi-pipeline-aks?branchName=master)]
+(https://dev.azure.com/rsndp12/vigneshwaras/_build/latest?definitionId=51&branchName=master)
 
 
