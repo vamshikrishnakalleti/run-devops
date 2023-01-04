@@ -1,2 +1,6 @@
 [![Build Status](https://dev.azure.com/rsndp12/vigneshwaras/_apis/build/status/vamshikrishnakalleti.shoppingclient-pipeline?branchName=master)]
 (https://dev.azure.com/rsndp12/vigneshwaras/_build/latest?definitionId=52&branchName=master)
+
+
+[![Build Status](https://dev.azure.com/rsndp12/vigneshwaras/_apis/build/status/vamshikrishnakalleti.shoppingapi-pipeline-aks?branchName=master)]
+(https://dev.azure.com/rsndp12/vigneshwaras/_build/latest?definitionId=51&branchName=master)
